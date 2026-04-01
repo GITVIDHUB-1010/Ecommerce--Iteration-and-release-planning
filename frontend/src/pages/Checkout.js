@@ -23,7 +23,8 @@ const Checkout = () => {
     if (!validateStep2()) { setError('Please fill all delivery details.'); return; }
     setLoading(true); setError('');
     try {
-      const { data } = await axios.post('/api/orders', {
+      const apiUrl = process.env.REACT_APP_API_URL || '';
+      const { data } = await axios.post(`${apiUrl}/api/orders`, {
         items: cart,
         customerName: form.name,
         address: `${form.address}, ${form.city}, ${form.state} - ${form.pincode}`

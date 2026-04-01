@@ -29,7 +29,8 @@ const ProductDetail = ({ onToast }) => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const { data } = await axios.get(`/api/products/${id}`);
+        const apiUrl = process.env.REACT_APP_API_URL || '';
+        const { data } = await axios.get(`${apiUrl}/api/products/${id}`);
         setProduct(data);
       } catch {
         onToast && onToast('Product not found', 'error');

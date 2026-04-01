@@ -35,13 +35,17 @@ const Shop = ({ onToast }) => {
       if (filters.minPrice) params.minPrice = filters.minPrice;
       if (filters.maxPrice) params.maxPrice = filters.maxPrice;
       if (filters.sort) params.sort = filters.sort;
-      const { data } = await axios.get('/api/products', { params });
+      const apiUrl = process.env.REACT_APP_API_URL || '';
+      const { data } = await axios.get(`${apiUrl}/api/products`, { params });
       setProducts(data);
     } catch { showToast('Failed to load products', 'error'); }
     finally { setLoading(false); }
   }, [filters]);
 
-  useEffect(() => { axios.get('/api/categories').then(r => setCategories(r.data)); }, []);
+  useEffect(() => { 
+    const apiUrl = process.env.REACT_APP_API_URL || '';
+    axios.get(`${apiUrl}/api/categories`).then(r => setCategories(r.data)); 
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(fetchProducts, 250);

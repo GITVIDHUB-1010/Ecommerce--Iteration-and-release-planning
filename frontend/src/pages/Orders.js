@@ -16,7 +16,8 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const { data } = await axios.get('/api/orders');
+      const apiUrl = process.env.REACT_APP_API_URL || '';
+      const { data } = await axios.get(`${apiUrl}/api/orders`);
       setOrders(data);
       if (selected) {
         const updated = data.find(o => o.id === selected.id);
