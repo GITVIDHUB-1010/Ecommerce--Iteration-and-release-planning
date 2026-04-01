@@ -2,6 +2,8 @@
 
 A full-stack e-commerce application built with **React** (frontend) and **Node.js/Express** (backend), covering all features from the SRS document across both Release 1 and Release 2.
 
+> **🎯 Ready to Deploy?** See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for live deployment instructions on Vercel + Railway!
+
 ---
 
 ## 📦 Tech Stack
