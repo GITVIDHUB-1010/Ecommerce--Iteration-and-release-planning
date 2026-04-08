@@ -25,6 +25,7 @@ const ProductDetail = ({ onToast }) => {
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
   const [activeTab, setActiveTab] = useState('details');
+  const [imageError, setImageError] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -124,7 +125,19 @@ const ProductDetail = ({ onToast }) => {
         {/* Left: Image */}
         <div className="detail-image-section">
           <div className="main-image-wrap">
-            <img src={product.image} alt={product.name} className="main-product-image" />
+            {imageError ? (
+              <div className="main-image-placeholder">
+                <span>📷</span>
+                <p>Image not available</p>
+              </div>
+            ) : (
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className="main-product-image"
+                onError={() => setImageError(true)}
+              />
+            )}
             {product.badge && (
               <span className="detail-badge" style={{ backgroundColor: badgeColor[product.badge] || '#666' }}>
                 {product.badge}

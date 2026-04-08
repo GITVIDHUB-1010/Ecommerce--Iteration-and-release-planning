@@ -21,6 +21,7 @@ const ProductCard = ({ product, onToast, style }) => {
   const navigate = useNavigate();
   const { cart, dispatch } = useCart();
   const [adding, setAdding] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const inCart = cart.some(i => i.id === product.id);
   const cartItem = cart.find(i => i.id === product.id);
 
@@ -46,7 +47,20 @@ const ProductCard = ({ product, onToast, style }) => {
   return (
     <div className="product-card" style={style} onClick={handleCardClick}>
       <div className="product-img-wrap">
-        <img src={product.image} alt={product.name} className="product-img" loading="lazy" />
+        {imageError ? (
+          <div className="product-img-placeholder">
+            <span>📷</span>
+            <p>Image not available</p>
+          </div>
+        ) : (
+          <img 
+            src={product.image} 
+            alt={product.name} 
+            className="product-img" 
+            loading="lazy"
+            onError={() => setImageError(true)}
+          />
+        )}
         {product.badge && (
           <span className={`badge ${badgeColor[product.badge] || 'badge-neutral'} product-badge`}>
             {product.badge}
